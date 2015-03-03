@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class Professor extends Pessoa {
 	private BigDecimal salario;
+	public static double BONUS = 0.1;
 
 	public Professor(String nome, String cpf, BigDecimal salario) {
 		super(nome, cpf);

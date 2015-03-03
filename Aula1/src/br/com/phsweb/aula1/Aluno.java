@@ -46,4 +46,15 @@ public class Aluno extends Pessoa {
 				+ ", dataAniversario=" + dataAniversario + "] \n";
 	}
 
+	public static boolean verificaMatricula(String matricula) {
+		if (matricula == null) {
+			return false;
+		} else if (matricula.trim().equals("")) {
+			return false;
+		} else if (matricula.length() != 8) {
+			return false;
+		}
+		return true;
+	}
+
 }
