@@ -6,11 +6,11 @@ public class Pessoa {
 	private String nome;
 	private String cpf;
 
-	public Pessoa(Long id, String nome, String cPF) {
+	public Pessoa(Long id, String nome, String cpf) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		cpf = cpf;
+		this.cpf = cpf;
 	}
 
 	public Long getId() {
@@ -33,8 +33,8 @@ public class Pessoa {
 		return cpf;
 	}
 
-	public void setCPF(String cPF) {
-		cpf = cPF;
+	public void setCPF(String cpf) {
+		this.cpf = cpf;
 	}
 
 	@Override
