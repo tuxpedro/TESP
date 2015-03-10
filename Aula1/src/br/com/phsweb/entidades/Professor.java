@@ -1,4 +1,4 @@
-package br.com.phsweb.aula1;
+package br.com.phsweb.entidades;
 
 import java.math.BigDecimal;
 
@@ -6,13 +6,13 @@ public class Professor extends Pessoa {
 	private BigDecimal salario;
 	public static double BONUS = 0.1;
 
-	public Professor(String nome, String cpf, BigDecimal salario) {
-		super(nome, cpf);
+	public Professor(Long id, String nome, String cpf, BigDecimal salario) {
+		super(id, nome, cpf);
 		this.setSalario(salario);
 	}
 
-	public Professor(String nome, String cpf) {
-		super(nome, cpf);
+	public Professor(Long id, String nome, String cpf) {
+		super(id, nome, cpf);
 	}
 
 	public BigDecimal getSalario() {
