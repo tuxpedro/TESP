@@ -1,4 +1,4 @@
-package br.com.phsweb.aula1;
+package br.com.phsweb;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
