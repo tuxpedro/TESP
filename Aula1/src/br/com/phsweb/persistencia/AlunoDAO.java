@@ -97,8 +97,8 @@ public class AlunoDAO implements DAO<Aluno, Long> {
 	@Override
 	public void update(Aluno t) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE tb_aluno set nome = ?, set cpf = ?, set matricula = ?, "
-				+ "set data_nascimento = ? WHERE id = ?";
+		String sql = "UPDATE tb_aluno set nome = ?, cpf = ?, matricula = ?, "
+				+ "data_nascimento = ? WHERE id = ?";
 
 		try {
 			PreparedStatement ps = JDBCUtil.getConnection().prepareStatement(
@@ -112,6 +112,8 @@ public class AlunoDAO implements DAO<Aluno, Long> {
 			} else {
 				ps.setString(4, df.format(t.getDataAniversario()));
 			}
+
+			ps.setLong(5, t.getId());
 
 			ps.execute();
 			ps.close();
