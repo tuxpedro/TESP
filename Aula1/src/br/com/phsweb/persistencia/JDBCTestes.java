@@ -7,7 +7,7 @@ public class JDBCTestes {
 		// remove todos os dados da tabela
 		try {
 			PreparedStatement ps = JDBCUtil.getConnection().prepareStatement(
-					"TRUNCATE" + t);
+					"TRUNCATE " + t);
 			ps.execute();
 			JDBCUtil.closeConnection();
 		} catch (Exception e) {

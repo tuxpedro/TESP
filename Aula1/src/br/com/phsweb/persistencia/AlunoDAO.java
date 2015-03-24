@@ -127,11 +127,10 @@ public class AlunoDAO implements DAO<Aluno, Long> {
 	@Override
 	public void delete(Aluno t) {
 		// TODO Auto-generated method stub
-		String sql = "DELETE FROM tb_aluno WHERE id = ?";
+		String sql = "DELETE FROM tb_aluno WHERE cpf = ?";
 		try {
-			PreparedStatement ps = JDBCUtil.getConnection().prepareStatement(
-					sql);
-			ps.setLong(1, t.getId());
+			PreparedStatement ps = JDBCUtil.getConnection().prepareStatement(sql);
+			ps.setString(1, t.getCPF());
 			ps.execute();
 			ps.close();
 			JDBCUtil.closeConnection();
@@ -166,7 +165,7 @@ public class AlunoDAO implements DAO<Aluno, Long> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return alunos;
 	}
 
 }

@@ -31,6 +31,28 @@ public class ProfessorDAO implements DAO<Professor, Long> {
 		return null;
 	}
 
+	public Professor findByCpf(String cpf) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM tb_professor WHERE cpf = ?";
+		try {
+			PreparedStatement ps = JDBCUtil.getConnection().prepareStatement(
+					sql);
+			ps.setString(1, cpf);
+			ResultSet row = ps.executeQuery();
+			if (row.next()) {
+				return new Professor(row.getLong("id"), row.getString("nome"),
+						row.getString("cpf"), row.getBigDecimal("salario"));
+			}
+
+			ps.close();
+			JDBCUtil.closeConnection();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	@Override
 	public boolean insert(Professor t) {
 		// TODO Auto-generated method stub
@@ -59,11 +81,12 @@ public class ProfessorDAO implements DAO<Professor, Long> {
 		try {
 			PreparedStatement ps = JDBCUtil.getConnection().prepareStatement(
 					sql);
-			ps.setString(1, t.getNome());
-			ps.setString(2, t.getCPF());
+			ps.setString	(1, t.getNome());
+			ps.setString	(2, t.getCPF());
 			ps.setBigDecimal(3, t.getSalario());
-			ps.setLong(4, t.getId());
-			ps.execute();
+			ps.setLong		(4, t.getId());
+			
+			ps.executeUpdate();
 			ps.close();
 			JDBCUtil.closeConnection();
 		} catch (Exception e) {
