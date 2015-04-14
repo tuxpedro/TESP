@@ -1,17 +1,20 @@
 package br.com.unibh.escola.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.JOINED)
+@Table(name="TB_PESSOA")
 public class Pessoa {
 
 	@Id
@@ -21,10 +24,13 @@ public class Pessoa {
 	@NotNull
 	@Size(min = 1, max = 50)
 	@Pattern(regexp = "[A-Za-z ]*", message = "Este campo de conter somente letras e espaços")
+	@Column(name="NOME", length=100, columnDefinition="VARCHAR(100)")
 	private String nome;
 
 	@NotNull
-	@Pattern(regexp = "/^d{3}.d{3}.d{3}-d{2}$/")
+	@Pattern(regexp = "/^\\d{3}.\\d{3}.\\d{3}-\\d{2}$/")
+	@Column(name="CPF", unique=true, columnDefinition="CHAR(14)", length=14, nullable=false)
+	@Size(min=14, max=14)
 	private String cpf;
 
 	public Pessoa() {
