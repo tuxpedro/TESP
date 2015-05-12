@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h:panelGroup id="cadastro">
+			<h:form id="cad" rendered="#{not empty professorMb.professor}">
+				<rich:panel>
+					<h:outputText value="Cadastro de professor"
+						style="font-size=15px; font-weight:bold;" />
+						
+					<rich:messages />
+					<h:panelGrid>
+						<h:outputLabel value="Nome" />
+						<h:inputText id="nome" value="#{professorMb.professor.nome}"
+							size="50" />
+						<h:message for="nome" errorClass="invalid" />
+						<h:outputLabel value="CPF" />
+						<h:inputText id="cpf" value="#{professorMb.professor.cpf}" />
+						<h:message for="cpf" errorClass="invalid" />
+						<h:outputLabel value="Salario" />
+						<h:inputText id="salario" value="#{professorMb.professor.salario}" />
+						<h:message for="salario" errorClass="invalid" />
+					</h:panelGrid>
+					<h:commandButton id="gravar" action="#{professorMb.gravar}"
+						value="Gravar" />
+					<h:commandButton id="cancelar" action="#{professorMb.cancelar}"
+						value="Cancelar" immediate="true" />
+				</rich:panel>
+			</h:form>
+		</h:panelGroup>
+		<rich:panel rendered="#{empty professorMb.professor}">
+			<h:outputText value="Lista de Professores"
+				style="font-size:15px;font-weight:bold" />
+			<h:form id="arg">
+				<h:outputLabel value="Nome:" />
+				<h:inputText id="nomeArg" value="#{professorMb.nomeArg}" />
+				<h:commandButton id="pesquisar" action="#{professorMb.pesquisar}"
+					value="Pesquisar" render="tabela" />
+				<h:commandButton id="novo" action="#{professorMb.novo}" value="Novo"
+					render="cadastro" />
+			</h:form>
+			<h:outputText value=" -" />
+
+			<h:panelGroup rendered="#{empty professorMb.professores}">
+				<h:outputText
+					value="Nenhum professor encontrado com o nome pesquisado" />
+			</h:panelGroup>
+			<h:form id="edit">
+				<rich:dataTable id="tabela" var="professor"
+					value="#{professorMb.professores}"
+					rendered="#{not empty professorMb.professores}"
+					onrowclick="selectRow('#{professor.id}')">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Id " />
+						</f:facet>
+						<h:outputText value="#{professor.id}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Nome " />
+						</f:facet>
+						<h:outputText value="#{professor.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="CPF " />
+						</f:facet>
+						<h:outputText value="#{professor.cpf}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Salario " />
+						</f:facet>
+						<h:outputText value="#{professor.salario}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Comandos " />
+						</f:facet>
+						<h:commandLink id="editar" action="#{professorMb.editar}"
+							value="Editar">
+							<f:setPropertyActionListener target="#{professorMb.id}"
+								value="#{professor.id}" />
+						</h:commandLink>
+						<h:outputText value=" " />
+						<h:commandLink id="excluir" action="#{professorMb.excluir}"
+							value="Excluir" render="tabela">
+							<f:setPropertyActionListener target="#{professorMb.id}"
+								value="#{professor.id}" />
+						</h:commandLink>
+					</rich:column>
+				</rich:dataTable>
+			</h:form>
+		</rich:panel>
+	</ui:define>
+</ui:composition>
