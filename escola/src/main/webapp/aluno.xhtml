@@ -52,7 +52,7 @@
 				<h:outputText value="Nenhum aluno existe" />
 			</h:panelGroup>
 
-			<h:form id="edt" >
+			<h:form id="edt">
 				<rich:dataTable id="tabela" var="aluno" value="#{alunomb.alunoes}"
 					rendered="#{not empty alunomb.alunoes}"
 					onrowclick="selectRow('#{aluno.id}')">
