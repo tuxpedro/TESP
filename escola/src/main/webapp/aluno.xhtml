@@ -37,7 +37,7 @@
 				</rich:panel>
 			</h:form>
 		</h:panelGroup>
-		<rich:panel  rendered="#{empty alunomb.aluno}">
+		<rich:panel rendered="#{empty alunomb.aluno}">
 			<h:outputText value="Lista de Alunos"
 				style="font-size:15px;font-weight:bold" />
 			<h:form id="arg">
@@ -51,60 +51,61 @@
 			<h:panelGroup rendered="#{empty alunomb.alunoes}">
 				<h:outputText value="Nenhum aluno existe" />
 			</h:panelGroup>
-				<h:form id="edt">
-					<rich:dataTable id="tabela" var="aluno" value="#{alunomb.alunoes}"
-						rendered="#{not empty alunomb.alunoes}"
-						onrowclick="selectRow('#{aluno.id}')">
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="Id " />
-							</f:facet>
-							<h:outputText value="#{aluno.id}" />
-						</rich:column>
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="Nome " />
-							</f:facet>
-							<h:outputText value="#{aluno.nome}" />
-						</rich:column>
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="CPF " />
-							</f:facet>
-							<h:outputText value="#{aluno.cpf}" />
-						</rich:column>
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="Matricula " />
-							</f:facet>
-							<h:outputText value="#{aluno.matricula}" />
-						</rich:column>
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="Data Aniversário " />
-							</f:facet>
-							<h:outputText value="#{aluno.dataAniversario}">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:outputText>
-						</rich:column>
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="Comandos " />
-							</f:facet>
-							<h:commandLink id="editar" action="#{alunomb.editar}"
-								value="Editar">
-								<f:setPropertyActionListener target="#{alunomb.id}"
-									value="#{aluno.id}" />
-							</h:commandLink>
-							<h:outputText value=" " />
-							<h:commandLink id="excluir" action="#{alunomb.excluir}"
-								value="Excluir" render="tabela">
-								<f:setPropertyActionListener target="#{alunomb.id}"
-									value="#{aluno.id}" />
-							</h:commandLink>
-						</rich:column>
-					</rich:dataTable>
-				</h:form>
+
+			<h:form id="edt" >
+				<rich:dataTable id="tabela" var="aluno" value="#{alunomb.alunoes}"
+					rendered="#{not empty alunomb.alunoes}"
+					onrowclick="selectRow('#{aluno.id}')">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Id " />
+						</f:facet>
+						<h:outputText value="#{aluno.id}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Nome " />
+						</f:facet>
+						<h:outputText value="#{aluno.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="CPF " />
+						</f:facet>
+						<h:outputText value="#{aluno.cpf}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Matricula " />
+						</f:facet>
+						<h:outputText value="#{aluno.matricula}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Data Aniversário " />
+						</f:facet>
+						<h:outputText value="#{aluno.dataAniversario}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Comandos " />
+						</f:facet>
+						<h:commandLink id="editar" action="#{alunomb.editar}"
+							value="Editar">
+							<f:setPropertyActionListener target="#{alunomb.id}"
+								value="#{aluno.id}" />
+						</h:commandLink>
+						<h:outputText value=" " />
+						<h:commandLink id="excluir" action="#{alunomb.excluir}"
+							value="Excluir" render="tabela">
+							<f:setPropertyActionListener target="#{alunomb.id}"
+								value="#{aluno.id}" />
+						</h:commandLink>
+					</rich:column>
+				</rich:dataTable>
+			</h:form>
 		</rich:panel>
 	</ui:define>
 </ui:composition>
