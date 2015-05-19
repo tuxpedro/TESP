@@ -16,7 +16,6 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "TB_SALA", uniqueConstraints = @UniqueConstraint(columnNames = "codigo"))
@@ -26,7 +25,7 @@ public class Sala {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	@NotBlank(message="Codigo invalido")
+	@NotBlank(message = "Codigo invalido")
 	private Long id;
 
 	@Column(name = "CODIGO", nullable = false, columnDefinition = "VARCHAR(10)")

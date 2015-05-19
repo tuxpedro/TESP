@@ -1,6 +1,7 @@
 package br.com.phsweb.escola.entidades;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +14,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-
 @Entity
 @PrimaryKeyJoinColumn
 @Table(name = "TB_ALUNO", uniqueConstraints = @UniqueConstraint(columnNames = "matricula"))
@@ -23,11 +23,13 @@ public class Aluno extends Pessoa {
 	@NotNull
 	@Column(name = "MATRICULA", unique = true, nullable = false)
 	private Long matricula;
-	
+
 	@NotNull
 	@Column(name = "DATA_ANIVERSARIO", nullable = false, columnDefinition = "DATE")
 	@Temporal(TemporalType.DATE)
 	private Date dataAniversario;
+
+	private List<Disciplina> disciplinas;
 
 	public Aluno() {
 	}
@@ -69,6 +71,14 @@ public class Aluno extends Pessoa {
 	public String toString() {
 		return super.toString() + "Aluno [matricula=" + matricula
 				+ ", dataAniversario=" + dataAniversario + "]";
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 
 }
