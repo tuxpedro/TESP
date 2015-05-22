@@ -1,7 +1,6 @@
 package br.com.phsweb.escola.entidades;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +23,6 @@ public class Professor extends Pessoa {
 	@DecimalMin("500.00")
 	@DecimalMax("50000.00")
 	private BigDecimal salario;
-	private List<Disciplina> disciplinas;
 
 	public static Double BONUS = 0.1D;
 
@@ -55,14 +53,6 @@ public class Professor extends Pessoa {
 	@Override
 	public String toString() {
 		return super.toString() + "Professor [salario=" + salario + "]";
-	}
-
-	public List<Disciplina> getDisciplinas() {
-		return disciplinas;
-	}
-
-	public void setDisciplinas(List<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
 	}
 
 }

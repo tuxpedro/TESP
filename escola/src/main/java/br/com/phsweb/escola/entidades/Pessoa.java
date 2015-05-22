@@ -24,7 +24,7 @@ public class Pessoa {
 
 	@NotNull
 	@Size(min = 2, max = 100)
-	@Pattern(regexp = "[A-Za-z ]*", message = "Este campo de conter somente letras e espaços")
+	@Pattern(regexp = "[a-zA-Zà-úÀ-Ú ]*", message = "Este campo de conter somente letras e espaços")
 	@Column(name = "NOME", length = 100, columnDefinition = "VARCHAR(100)", nullable = false)
 	private String nome;
 

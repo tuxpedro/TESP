@@ -1,7 +1,6 @@
 package br.com.phsweb.escola.entidades;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,8 +27,6 @@ public class Aluno extends Pessoa {
 	@Column(name = "DATA_ANIVERSARIO", nullable = false, columnDefinition = "DATE")
 	@Temporal(TemporalType.DATE)
 	private Date dataAniversario;
-
-	private List<Disciplina> disciplinas;
 
 	public Aluno() {
 	}
@@ -71,14 +68,6 @@ public class Aluno extends Pessoa {
 	public String toString() {
 		return super.toString() + "Aluno [matricula=" + matricula
 				+ ", dataAniversario=" + dataAniversario + "]";
-	}
-
-	public List<Disciplina> getDisciplinas() {
-		return disciplinas;
-	}
-
-	public void setDisciplinas(List<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
 	}
 
 }
