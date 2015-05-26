@@ -7,8 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
+import javax.persistence.Version;
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -35,7 +39,7 @@ public class Disciplina {
 	private String curso;
 
 	@Column(name = "CARGAHORARIA", columnDefinition = "INT(3)", length = 3, nullable = false)
-	@Max(160)
+	@DecimalMax(value = "160.00")
 	@NotNull
 	private int cargaHoraria;
 
@@ -67,19 +71,20 @@ public class Disciplina {
 	@Column(name = "OBS", columnDefinition = "VARCHAR(100)", length = 100, nullable = false)
 	private String observacao;
 
-	@Column(name = "SALA", nullable = false)
-	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "SALA_ID", insertable = false, updatable = false, nullable = false)
 	private Sala sala;
 
-	@Column(name = "PROFESSOR", nullable = false)
-	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "PROFESSOR_ID", insertable = false, updatable = false, nullable = false)
 	private Professor professor;
 
-	@Column(name = "ALUNOS", nullable = false)
-	@NotNull
+	@ManyToMany(mappedBy = "disciplinas")
 	private List<Aluno> alunos;
 
-	private int versão;
+	@Version
+	@Column(name="VERSAO")
+	private int versao;
 
 	public Disciplina() {
 	}
@@ -180,12 +185,22 @@ public class Disciplina {
 		this.alunos = alunos;
 	}
 
-	public int getVersão() {
-		return versão;
+	public int getVersao() {
+		return versao;
 	}
 
-	public void setVersão(int versão) {
-		this.versão = versão;
+	public void setVersao(int versao) {
+		this.versao = versao;
+	}
+
+	@Override
+	public String toString() {
+		return "Disciplina [id=" + id + ", nome=" + nome + ", curso=" + curso
+				+ ", cargaHoraria=" + cargaHoraria + ", tipo=" + tipo
+				+ ", ementa=" + ementa + ", Bibliografia=" + Bibliografia
+				+ ", distribuicaoAvalicao=" + distribuicaoAvalicao
+				+ ", observacao=" + observacao + ", sala=" + sala
+				+ ", professor=" + professor + ", alunos=" + alunos + "]";
 	}
 
 }

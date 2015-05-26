@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -29,6 +32,8 @@ public class Aluno extends Pessoa {
 	@Temporal(TemporalType.DATE)
 	private Date dataAniversario;
 
+	@ManyToMany
+	@JoinTable(name = "ALUNO_DISCIPLINA", joinColumns = { @JoinColumn(name = "ALUNO_ID") }, inverseJoinColumns = { @JoinColumn(name = "DISCIPLINA_ID") })
 	private List<Disciplina> disciplinas;
 
 	public Aluno() {

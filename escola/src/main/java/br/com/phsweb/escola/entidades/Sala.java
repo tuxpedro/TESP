@@ -1,21 +1,23 @@
 package br.com.phsweb.escola.entidades;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "TB_SALA", uniqueConstraints = @UniqueConstraint(columnNames = "codigo"))
@@ -24,8 +26,7 @@ public class Sala {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	@NotBlank(message = "Codigo invalido")
+	@Column(name = "ID", nullable = false)
 	private Long id;
 
 	@Column(name = "CODIGO", nullable = false, columnDefinition = "VARCHAR(10)")
@@ -59,6 +60,13 @@ public class Sala {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATATERMINOMANUTENCAO", nullable = true, columnDefinition = "DATE")
 	private Date dataTerminoManutencao;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "professor")
+	private List<Disciplina> disciplinas;
+
+	@Version
+	@Column(name="VERSAO")
+	private int versao;
 
 	public Sala() {
 	}
@@ -159,6 +167,22 @@ public class Sala {
 				+ possuiComputador + ", observacao=" + observacao + ", status="
 				+ status + ", dataTerminoManutencao=" + dataTerminoManutencao
 				+ "]";
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
+	public int getVersao() {
+		return versao;
+	}
+
+	public void setVersao(int versao) {
+		this.versao = versao;
 	}
 
 }

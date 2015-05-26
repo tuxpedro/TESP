@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -24,7 +25,7 @@ public class Pessoa {
 
 	@NotNull
 	@Size(min = 2, max = 100)
-	@Pattern(regexp = "[A-Za-z ]*", message = "Este campo de conter somente letras e espaços")
+	@Pattern(regexp = "[a-zA-Zà-úÀ-Ú ]*", message = "Este campo de conter somente letras e espaços")
 	@Column(name = "NOME", length = 100, columnDefinition = "VARCHAR(100)", nullable = false)
 	private String nome;
 
@@ -33,6 +34,10 @@ public class Pessoa {
 	@Column(name = "CPF", unique = true, columnDefinition = "CHAR(14)", length = 14, nullable = false)
 	@Size(min = 14, max = 14)
 	private String cpf;
+	
+	@Version
+	@Column(name="VERSAO")
+	private int versao;
 
 	public Pessoa() {
 
@@ -76,6 +81,14 @@ public class Pessoa {
 	@Override
 	public String toString() {
 		return "Pessoa [id=" + id + ", nome=" + nome + ", cpf=" + cpf + "]";
+	}
+
+	public int getVersao() {
+		return versao;
+	}
+
+	public void setVersao(int versao) {
+		this.versao = versao;
 	}
 
 }

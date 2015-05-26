@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
@@ -24,9 +26,11 @@ public class Professor extends Pessoa {
 	@DecimalMin("500.00")
 	@DecimalMax("50000.00")
 	private BigDecimal salario;
-	private List<Disciplina> disciplinas;
 
 	public static Double BONUS = 0.1D;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sala")
+	private List<Disciplina> disciplinas;
 
 	public BigDecimal getSalario() {
 		return salario;
