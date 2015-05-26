@@ -1,11 +1,14 @@
 package br.com.phsweb.escola.entidades;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
@@ -25,6 +28,9 @@ public class Professor extends Pessoa {
 	private BigDecimal salario;
 
 	public static Double BONUS = 0.1D;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sala")
+	private List<Disciplina> disciplinas;
 
 	public BigDecimal getSalario() {
 		return salario;
@@ -53,6 +59,14 @@ public class Professor extends Pessoa {
 	@Override
 	public String toString() {
 		return super.toString() + "Professor [salario=" + salario + "]";
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 
 }
