@@ -116,17 +116,17 @@
 							<h:panelGrid columns="3">
 
 								<h:outputLabel value="Nome" for="nome" />
-								<h:inputText id="nome" />
+								<h:inputText id="nome" value="#{disciplinaMb.disciplina.nome}" />
 								<br />
 								<h:outputLabel value="Curso" for="curso" />
-								<h:inputText id="curso" />
+								<h:inputText id="curso" value="#{disciplinaMb.disciplina.curso}" />
 								<br />
 								<h:outputLabel value="Carga Horária" for="cargahoraria" />
 								<rich:inputNumberSpinner id="cargahoraria" minValue="0"
-									maxValue="160" />
+									maxValue="160" value="#{disciplinaMb.disciplina.cargaHoraria}" />
 								<h:message for="cargahoraria" errorClass="invalid" />
 								<h:outputLabel value="Tipo" for="tipo" />
-								<h:selectOneRadio>
+								<h:selectOneRadio value="#{disciplinaMb.disciplina.tipo}">
 									<f:selectItem itemValue="1" itemLabel="Presencial" />
 									<f:selectItem itemValue="2" itemLabel="À distância" />
 									<f:selectItem itemValue="3"
@@ -134,30 +134,41 @@
 								</h:selectOneRadio>
 								<br />
 								<h:outputLabel value="Sala" for="sala" />
-								<h:selectOneMenu id="sala">
-									<f:selectItem itemValue="1" itemLabel="Teste" />
-								</h:selectOneMenu>
+								<rich:select id="sala" value="#{disciplinaMb.disciplina.sala}">
+									<f:selectItem itemLabel="Selecione a sala"
+										noSelectionOption="true" />
+									<f:selectItems value="#{disciplinaMb.salas}" var="s"
+										itemValue="#{s}" itemLabel="#{s.codigo}" />
+								</rich:select>
 								<br />
 								<h:outputLabel value="Professor" for="professor" />
-								<h:selectOneMenu id="professor">
-									<f:selectItem itemValue="1" itemLabel="Teste" />
-								</h:selectOneMenu>
+								<rich:select id="professor"
+									value="#{disciplinaMb.disciplina.professor}">
+									<f:selectItem itemLabel="Selecione o professor"
+										noSelectionOption="true" />
+									<f:selectItems value="#{disciplinaMb.professores}" var="p"
+										itemValue="#{p}" itemLabel="#{p.nome}" />
+								</rich:select>
 							</h:panelGrid>
 						</rich:tab>
 						<rich:tab header="Plano de Ensino">
 							<h:panelGrid columns="3">
 								<h:outputLabel value="Ementa" for="ementa" />
-								<h:inputTextarea id="ementa" rows="5" cols="100" />
+								<h:inputTextarea id="ementa" rows="5" cols="100"
+									value="#{disciplinaMb.disciplina.ementa}" />
 								<br />
 								<h:outputLabel value="Bibliografia" for="bio" />
-								<h:inputTextarea id="bio" rows="5" cols="100" />
+								<h:inputTextarea id="bio" rows="5" cols="100"
+									value="#{disciplinaMb.disciplina.bibliografia}" />
 								<br />
 								<h:outputLabel value="Distribuição das Avalições"
 									for="avaliacao" />
-								<h:inputTextarea id="avaliacao" rows="5" cols="100" />
+								<h:inputTextarea id="avaliacao" rows="5" cols="100"
+									value="#{disciplinaMb.disciplina.distribuicaoAvalicao}" />
 								<br />
 								<h:outputLabel value="Observações" for="obs" />
-								<h:inputTextarea id="obs" rows="5" cols="100" />
+								<h:inputTextarea id="obs" rows="5" cols="100"
+									value="#{disciplinaMb.disciplina.observacao}" />
 							</h:panelGrid>
 						</rich:tab>
 						<rich:tab header="Alunos">
@@ -166,8 +177,13 @@
 									<f:facet name="header">
 										<h:outputText value="Selecione os alunos" />
 									</f:facet>
-									<rich:pickList listWidth="265px" listHeight="100px"
-										orderable="true"></rich:pickList>
+									<rich:pickList value="#{disciplinaMb.disciplina.alunos}"
+										sourceCaption="Alunos disponíveis"
+										targetCaption="Alunos Selecionados" listWidth="265px"
+										listHeight="100px" orderable="true">
+										<f:selectItems value="#{disciplinaMb.alunos}" var="a"
+											itemValue="#{a}" itemLabel="#{a.nome}" />
+									</rich:pickList>
 								</rich:panel>
 							</h:panelGrid>
 						</rich:tab>
@@ -183,8 +199,10 @@
 					<br />
 					<br />
 					<br />
-					<h:commandButton id="save" value="Gravar" />
-					<h:commandButton id="cancenlar" value="Cancelar" />
+					<h:commandButton id="save" value="Gravar"
+						action="#{disciplinaMb.gravar}" />
+					<h:commandButton id="cancenlar" value="Cancelar"
+						action="#{disciplinaMb.cancelar}" />
 
 				</h:form>
 			</h:panelGroup>

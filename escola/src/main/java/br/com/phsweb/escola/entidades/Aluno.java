@@ -86,4 +86,45 @@ public class Aluno extends Pessoa {
 		this.disciplinas = disciplinas;
 	}
 
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((dataAniversario == null) ? 0 : dataAniversario.hashCode());
+		result = prime * result
+				+ ((matricula == null) ? 0 : matricula.hashCode());
+		return result;
+	}
+
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Aluno other = (Aluno) obj;
+		if (dataAniversario == null) {
+			if (other.dataAniversario != null)
+				return false;
+		} else if (!dataAniversario.equals(other.dataAniversario))
+			return false;
+		if (matricula == null) {
+			if (other.matricula != null)
+				return false;
+		} else if (!matricula.equals(other.matricula))
+			return false;
+		return true;
+	}
+	
+	
+	
+	
+	
+	
+
 }

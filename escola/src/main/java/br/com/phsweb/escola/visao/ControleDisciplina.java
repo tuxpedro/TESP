@@ -10,8 +10,14 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import br.com.phsweb.escola.entidades.Aluno;
 import br.com.phsweb.escola.entidades.Disciplina;
+import br.com.phsweb.escola.entidades.Professor;
+import br.com.phsweb.escola.entidades.Sala;
+import br.com.phsweb.escola.negocio.ServicoAluno;
 import br.com.phsweb.escola.negocio.ServicoDisciplina;
+import br.com.phsweb.escola.negocio.ServicoProfessor;
+import br.com.phsweb.escola.negocio.ServicoSala;
 
 @ManagedBean(name = "disciplinaMb")
 @ViewScoped
@@ -22,11 +28,23 @@ public class ControleDisciplina {
 	@Inject
 	private ServicoDisciplina sd;
 
+	@Inject
+	private ServicoSala ss;
+
+	@Inject
+	private ServicoAluno sa;
+
+	@Inject
+	private ServicoProfessor sp;
+
 	private Disciplina disciplina;
 	private Long id;
 	private String nomeDisciplina;
 	private String nomeCurso;
 	private List<Disciplina> disciplinas;
+	private List<Professor> professores;
+	private List<Sala> salas;
+	private List<Aluno> alunos;
 
 	public ServicoDisciplina getSd() {
 		return sd;
@@ -74,6 +92,22 @@ public class ControleDisciplina {
 
 	public void setDisciplinas(List<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
+	}
+
+	public ServicoAluno getSa() {
+		return sa;
+	}
+
+	public void setSa(ServicoAluno sa) {
+		this.sa = sa;
+	}
+
+	public ServicoProfessor getSp() {
+		return sp;
+	}
+
+	public void setSp(ServicoProfessor sp) {
+		this.sp = sp;
 	}
 
 	@PostConstruct
@@ -141,6 +175,52 @@ public class ControleDisciplina {
 
 	public void cancelar() {
 		disciplina = null;
+	}
+
+	public ServicoSala getSs() {
+		return ss;
+	}
+
+	public void setSs(ServicoSala ss) {
+		this.ss = ss;
+	}
+
+	public List<Professor> getProfessores() {
+		try {
+			return sp.findAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return professores;
+	}
+
+	public void setProfessores(List<Professor> professores) {
+		this.professores = professores;
+	}
+
+	public List<Sala> getSalas() {
+		try {
+			return ss.findAll();
+		} catch (Exception e) {
+		}
+		return salas;
+	}
+
+	public void setSalas(List<Sala> salas) {
+		this.salas = salas;
+	}
+
+	public List<Aluno> getAlunos() {
+		try {
+			return sa.findAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alunos;
+	}
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
 	}
 
 }
