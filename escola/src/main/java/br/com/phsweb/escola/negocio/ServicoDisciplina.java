@@ -52,6 +52,7 @@ public class ServicoDisciplina implements DAO<Disciplina, Long> {
 		log.info("Encontrando todas as disciplinas ");
 		return em.createQuery("from Disciplina").getResultList();
 	}
+	
 
 	@Override
 	public List<Disciplina> findByNAme(String nome) throws Exception {
