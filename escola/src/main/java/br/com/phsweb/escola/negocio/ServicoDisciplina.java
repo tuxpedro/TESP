@@ -50,7 +50,7 @@ public class ServicoDisciplina implements DAO<Disciplina, Long> {
 	@Override
 	public List<Disciplina> findAll() throws Exception {
 		log.info("Encontrando todas as disciplinas ");
-		return em.createQuery("from Disciolina").getResultList();
+		return em.createQuery("from Disciplina").getResultList();
 	}
 
 	@Override
