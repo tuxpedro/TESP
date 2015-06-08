@@ -65,7 +65,7 @@ public class Sala {
 	private List<Disciplina> disciplinas;
 
 	@Version
-	@Column(name="VERSAO")
+	@Column(name = "VERSAO")
 	private int versao;
 
 	public Sala() {
@@ -185,7 +185,6 @@ public class Sala {
 		this.versao = versao;
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -206,7 +205,6 @@ public class Sala {
 		result = prime * result + status;
 		return result;
 	}
-	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -252,8 +250,5 @@ public class Sala {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }
