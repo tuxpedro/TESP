@@ -776,6 +776,6 @@ standard deployment descriptor.
   <display-name>Escola</display-name>
   <context-param>
     <param-name>org.richfaces.skin</param-name>
-    <param-value>plain</param-value>
+    <param-value>deepMarine</param-value>
   </context-param>
 </web-app>

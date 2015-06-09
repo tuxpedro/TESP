@@ -65,7 +65,7 @@ public class Sala {
 	private List<Disciplina> disciplinas;
 
 	@Version
-	@Column(name="VERSAO")
+	@Column(name = "VERSAO")
 	private int versao;
 
 	public Sala() {
@@ -183,6 +183,72 @@ public class Sala {
 
 	public void setVersao(int versao) {
 		this.versao = versao;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((capacidade == null) ? 0 : capacidade.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime
+				* result
+				+ ((dataTerminoManutencao == null) ? 0 : dataTerminoManutencao
+						.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((observacao == null) ? 0 : observacao.hashCode());
+		result = prime * result + (possuiComputador ? 1231 : 1237);
+		result = prime * result + (possuiDataShow ? 1231 : 1237);
+		result = prime * result + (possuiQuadroBranco ? 1231 : 1237);
+		result = prime * result + status;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sala other = (Sala) obj;
+		if (capacidade == null) {
+			if (other.capacidade != null)
+				return false;
+		} else if (!capacidade.equals(other.capacidade))
+			return false;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		if (dataTerminoManutencao == null) {
+			if (other.dataTerminoManutencao != null)
+				return false;
+		} else if (!dataTerminoManutencao.equals(other.dataTerminoManutencao))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (observacao == null) {
+			if (other.observacao != null)
+				return false;
+		} else if (!observacao.equals(other.observacao))
+			return false;
+		if (possuiComputador != other.possuiComputador)
+			return false;
+		if (possuiDataShow != other.possuiDataShow)
+			return false;
+		if (possuiQuadroBranco != other.possuiQuadroBranco)
+			return false;
+		if (status != other.status)
+			return false;
+		return true;
 	}
 
 }
