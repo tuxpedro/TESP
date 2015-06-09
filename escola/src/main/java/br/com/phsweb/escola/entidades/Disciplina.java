@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -72,18 +74,24 @@ public class Disciplina {
 	private String observacao;
 
 	@ManyToOne
-	@JoinColumn(name = "SALA_ID", insertable = false, updatable = false, nullable = false)
+	// @JoinColumn(name = "SALA_ID", insertable = false, updatable = false,
+	// nullable = false)
+	@NotNull
 	private Sala sala;
 
 	@ManyToOne
-	@JoinColumn(name = "PROFESSOR_ID", insertable = false, updatable = false, nullable = false)
+	// @JoinColumn(name = "PROFESSOR_ID", insertable = false, updatable = false,
+	// nullable = false)
+	@NotNull
 	private Professor professor;
 
-	@ManyToMany(mappedBy = "disciplinas")
+	@NotNull
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "TB_DISCIPLINA_ALUNO", joinColumns = { @JoinColumn(name = "DISCIPLINA_ID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "ALUNO_ID", nullable = false, updatable = false) })
 	private List<Aluno> alunos;
 
 	@Version
-	@Column(name="VERSAO")
+	@Column(name = "VERSAO")
 	private int versao;
 
 	public Disciplina() {

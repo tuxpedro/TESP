@@ -29,7 +29,7 @@ public class Professor extends Pessoa {
 
 	public static Double BONUS = 0.1D;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sala")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "professor")
 	private List<Disciplina> disciplinas;
 
 	public BigDecimal getSalario() {

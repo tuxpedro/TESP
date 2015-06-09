@@ -61,7 +61,7 @@ public class Sala {
 	@Column(name = "DATATERMINOMANUTENCAO", nullable = true, columnDefinition = "DATE")
 	private Date dataTerminoManutencao;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "professor")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sala")
 	private List<Disciplina> disciplinas;
 
 	@Version

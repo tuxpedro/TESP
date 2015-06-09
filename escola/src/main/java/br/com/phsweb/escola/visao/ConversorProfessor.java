@@ -17,7 +17,7 @@ public class ConversorProfessor implements Converter {
 			String valor) {
 		try {
 			ServicoProfessor sp = (ServicoProfessor) new InitialContext()
-					.lookup("java:glogal/escola/ServicoProfessor");
+					.lookup("java:global/escola/ServicoProfessor");
 			return sp.find(new Long(valor));
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -110,17 +110,17 @@
 				<h:form>
 					<h:outputText value="Cadastro de disciplina"
 						style="font-size:15px; font-weight:bold;" />
-					<rich:tabPanel switchType="ajax" id="tp" headerPosition="top"
+					<rich:tabPanel id="tp" headerPosition="top"
 						headerLocation="center">
 						<rich:tab header="Geral">
 							<h:panelGrid columns="3">
 
 								<h:outputLabel value="Nome" />
-								<h:inputText id="nome" />
+								<h:inputText id="nome" value="#{disciplinaMb.disciplina.nome}"/>
 								<h:message for="nome" errorClass="invalid" />
 
 								<h:outputLabel value="Curso" for="curso" />
-								<h:inputText id="curso" />
+								<h:inputText id="curso" value="#{disciplinaMb.disciplina.curso}" />
 								<h:message for="curso" errorClass="invalid" />
 
 								<h:outputLabel value="Carga Horária" for="cargahoraria" />
@@ -140,24 +140,24 @@
 								<br />
 
 								<h:outputLabel value="Sala" for="sala" />
-								<!-- rich:select id="sala" value="#{disciplinaMb.disciplina.sala}">
+								<rich:select id="sala" value="#{disciplinaMb.disciplina.sala}">
 									<f:selectItem itemLabel="Selecione a sala"
 										noSelectionOption="true" />
 									<f:selectItems value="#{disciplinaMb.salas}" var="s"
 										itemValue="#{s}" itemLabel="#{s.codigo}" />
 									<f:converter converterId="ConversorSala" />
-								</rich:select-->
+								</rich:select>
 
 								<br />
 								<h:outputLabel value="Professor" for="professor" />
-								<!-- rich:select id="professor"
+								<rich:select id="professor"
 									value="#{disciplinaMb.disciplina.professor}">
 									<f:selectItem itemLabel="Selecione o professor"
 										noSelectionOption="true"/>
 									<f:selectItems value="#{disciplinaMb.professores}" var="p"
 										itemValue="#{p}" itemLabel="#{p.nome}" />
 									<f:converter converterId="ConversorProfessor" />
-								</rich:select-->
+								</rich:select>
 
 							</h:panelGrid>
 						</rich:tab>
@@ -165,23 +165,23 @@
 							<h:panelGrid columns="1">
 
 								<h:outputLabel value="Ementa" for="ementa" />
-								<h:inputTextarea id="ementa" rows="5" cols="100" />
+								<h:inputTextarea id="ementa" rows="5" cols="100" value="#{disciplinaMb.disciplina.ementa}" />
 								<h:message for="ementa" errorClass="invalid" />
 
 								<br />
 								<h:outputLabel value="Bibliografia" for="bib" />
-								<h:inputTextarea id="bib" rows="5" cols="100" />
+								<h:inputTextarea id="bib" rows="5" cols="100" value="#{disciplinaMb.disciplina.bibliografia}"/>
 								<h:message for="bio" errorClass="invalid" />
 
 								<br />
 								<h:outputLabel value="Distribuição das Avalições"
 									for="avaliacao" />
-								<h:inputTextarea id="avaliacao" rows="5" cols="100" />
+								<h:inputTextarea id="avaliacao" rows="5" cols="100"  value="#{disciplinaMb.disciplina.distribuicaoAvalicao}"/>
 								<h:message for="avaliacao" errorClass="invalid" />
 
 								<br />
 								<h:outputLabel value="Observações" for="obs" />
-								<h:inputTextarea id="obs" rows="5" cols="100" />
+								<h:inputTextarea id="obs" rows="5" cols="100" value="#{disciplinaMb.disciplina.observacao}" />
 								<h:message for="obs" errorClass="invalid" />
 
 							</h:panelGrid>
@@ -193,14 +193,14 @@
 									<f:facet name="header">
 										<h:outputText value="Selecione os alunos" />
 									</f:facet>
-									<!-- rich:pickList value="#{disciplinaMb.disciplina.alunos}"
+									<rich:pickList value="#{disciplinaMb.disciplina.alunos}"
 										sourceCaption="Alunos disponíveis"
 										targetCaption="Alunos Selecionados" listWidth="265px"
 										listHeight="100px" orderable="true">
 										<f:selectItems value="#{disciplinaMb.alunos}" var="a"
 											itemValue="#{a}" itemLabel="#{a.nome}" />
 										<f:converter converterId="ConversorAluno" />
-									</rich:pickList-->
+									</rich:pickList>
 
 								</rich:panel>
 
