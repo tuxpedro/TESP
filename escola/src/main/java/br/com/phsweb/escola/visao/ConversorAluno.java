@@ -17,7 +17,7 @@ public class ConversorAluno implements Converter {
 			String valor) {
 		try {
 			ServicoAluno sa = (ServicoAluno) new InitialContext()
-					.lookup("java:global/escola/ServicoAluno");
+					.lookup("java:global/escola-phs/ServicoAluno");
 			return sa.find(new Long(valor));
 		} catch (Exception e) {
 			e.printStackTrace();

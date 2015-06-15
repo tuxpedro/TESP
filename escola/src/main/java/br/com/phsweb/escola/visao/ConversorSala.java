@@ -16,7 +16,7 @@ public class ConversorSala implements Converter {
 			String value) {
 		try {
 			ServicoSala ss = (ServicoSala) new InitialContext()
-					.lookup("java:global/escola/ServicoSala");
+					.lookup("java:global/escola-phs/ServicoSala");
 			return ss.find(new Long(value));
 		} catch (Exception e) {
 			e.printStackTrace();

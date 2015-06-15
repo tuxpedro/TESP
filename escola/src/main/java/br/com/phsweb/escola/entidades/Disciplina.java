@@ -4,12 +4,16 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.DecimalMax;
@@ -19,6 +23,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "TB_DISCIPLINA")
+@NamedQueries({ @NamedQuery(name = "Disciplina.findByNomeECurso", query = "SELECT d FROM Disciplina d WHERE d.nome LIKE :nome AND d.curso LIKE :curso") })
 public class Disciplina {
 
 	@Id
@@ -48,42 +53,48 @@ public class Disciplina {
 	private int tipo;
 
 	@NotNull
-	@Size(min = 100, max = 4000, message = "Você excedeu o número de caracteres")
+	@Size(min = 5, max = 4000, message = "Você excedeu o número de caracteres")
 	@Pattern(regexp = "[a-zA-Zà-úÀ-Ú0-9 ]*")
 	@Column(name = "EMENTA", columnDefinition = "VARCHAR(4000)", length = 4000, nullable = false)
 	private String ementa;
 
 	@NotNull
-	@Size(min = 100, max = 4000, message = "Você excedeu o número de caracteres")
+	@Size(min = 5, max = 4000, message = "Você excedeu o número de caracteres")
 	@Pattern(regexp = "[a-zA-Zà-úÀ-Ú0-9 ]*")
 	@Column(name = "BIBLIOGRAFIA", columnDefinition = "VARCHAR(4000)", length = 4000, nullable = false)
 	private String Bibliografia;
 
 	@NotNull
-	@Size(min = 100, max = 4000, message = "Você excedeu o número de caracteres")
+	@Size(min = 5, max = 4000, message = "Você excedeu o número de caracteres")
 	@Pattern(regexp = "[a-zA-Zà-úÀ-Ú0-9 ]*")
 	@Column(name = "DISTRIBUICAO_AVALIACAO", columnDefinition = "VARCHAR(100)", length = 100, nullable = false)
 	private String distribuicaoAvalicao;
 
 	@NotNull
-	@Size(min = 100, max = 4000, message = "Você excedeu o número de caracteres")
+	@Size(min = 5, max = 4000, message = "Você excedeu o número de caracteres")
 	@Pattern(regexp = "[a-zA-Zà-úÀ-Ú0-9 ]*")
 	@Column(name = "OBS", columnDefinition = "VARCHAR(100)", length = 100, nullable = false)
 	private String observacao;
 
 	@ManyToOne
-	@JoinColumn(name = "SALA_ID", insertable = false, updatable = false, nullable = false)
+	// @JoinColumn(name = "SALA_ID", insertable = false, updatable = false,
+	// nullable = false)
+	@NotNull
 	private Sala sala;
 
 	@ManyToOne
-	@JoinColumn(name = "PROFESSOR_ID", insertable = false, updatable = false, nullable = false)
+	// @JoinColumn(name = "PROFESSOR_ID", insertable = false, updatable = false,
+	// nullable = false)
+	@NotNull
 	private Professor professor;
 
-	@ManyToMany(mappedBy = "disciplinas")
+	@NotNull
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "TB_DISCIPLINA_ALUNO", joinColumns = { @JoinColumn(name = "DISCIPLINA_ID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "ALUNO_ID", nullable = false, updatable = false) })
 	private List<Aluno> alunos;
 
 	@Version
-	@Column(name="VERSAO")
+	@Column(name = "VERSAO")
 	private int versao;
 
 	public Disciplina() {
