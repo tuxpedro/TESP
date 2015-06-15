@@ -110,6 +110,52 @@ public class ControleDisciplina {
 		this.sp = sp;
 	}
 
+	public ServicoSala getSs() {
+		return ss;
+	}
+
+	public void setSs(ServicoSala ss) {
+		this.ss = ss;
+	}
+
+	public List<Professor> getProfessores() {
+		try {
+			return sp.findAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return professores;
+	}
+
+	public void setProfessores(List<Professor> professores) {
+		this.professores = professores;
+	}
+
+	public List<Sala> getSalas() {
+		try {
+			return ss.findAll();
+		} catch (Exception e) {
+		}
+		return salas;
+	}
+
+	public void setSalas(List<Sala> salas) {
+		this.salas = salas;
+	}
+
+	public List<Aluno> getAlunos() {
+		try {
+			return sa.findAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alunos;
+	}
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+
 	@PostConstruct
 	public void listaDisciplina() {
 		log.info("excutando o MB de disciplina");
@@ -175,52 +221,6 @@ public class ControleDisciplina {
 
 	public void cancelar() {
 		disciplina = null;
-	}
-
-	public ServicoSala getSs() {
-		return ss;
-	}
-
-	public void setSs(ServicoSala ss) {
-		this.ss = ss;
-	}
-
-	public List<Professor> getProfessores() {
-		try {
-			return sp.findAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return professores;
-	}
-
-	public void setProfessores(List<Professor> professores) {
-		this.professores = professores;
-	}
-
-	public List<Sala> getSalas() {
-		try {
-			return ss.findAll();
-		} catch (Exception e) {
-		}
-		return salas;
-	}
-
-	public void setSalas(List<Sala> salas) {
-		this.salas = salas;
-	}
-
-	public List<Aluno> getAlunos() {
-		try {
-			return sa.findAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return alunos;
-	}
-
-	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
 	}
 
 }
