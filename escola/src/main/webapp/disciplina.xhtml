@@ -60,13 +60,14 @@
 						<f:facet name="header">
 							<h:outputText value="Carga Horária" />
 						</f:facet>
-						<h:outputText value="#{disciplina.cargahoraria}" />
+						<h:outputText value="#{disciplina.cargaHoraria}" />
 					</rich:column>
 					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Tipo" />
 						</f:facet>
-						<h:outputText value="#{disciplina.tipo}" />
+						<h:outputText
+							value="#{disciplina.tipo}" />
 					</rich:column>
 					<rich:column>
 						<f:facet name="header">
@@ -124,7 +125,7 @@
 
 								<h:outputLabel value="Carga Horária" for="cargahoraria" />
 								<rich:inputNumberSpinner id="cargahoraria" minValue="0"
-									maxValue="160" />
+									maxValue="160" value="#{disciplinaMb.disciplina.cargaHoraria}" />
 								<h:message for="cargahoraria" errorClass="invalid" />
 
 								<h:outputLabel value="Tipo" for="tipo" />

@@ -52,7 +52,6 @@ public class ServicoDisciplina implements DAO<Disciplina, Long> {
 		log.info("Encontrando todas as disciplinas ");
 		return em.createQuery("from Disciplina").getResultList();
 	}
-	
 
 	@Override
 	public List<Disciplina> findByNAme(String nome) throws Exception {
@@ -60,15 +59,10 @@ public class ServicoDisciplina implements DAO<Disciplina, Long> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Disciplina> findByNameECurso(String nome, String Curso) {
-		if (nome != null) {
-			log.info("Pesquisando Disciplina por " + nome);
-			return em.createNamedQuery("Disciplina.findByNameECurso")
-					.setParameter("nome", nome).getResultList();
-		} else {
-			log.info("Pesquisando Disciplina por " + Curso);
-			return em.createNamedQuery("Disciplina.findByNameECurso")
-					.setParameter("nome", Curso).getResultList();
-		}
+	public List<Disciplina> findByNameECurso(String nome, String curso) {
+		log.info("Pesquisando Disciplina por " + nome);
+		return em.createNamedQuery("Disciplina.findByNameECurso")
+				.setParameter("nome", nome+"%").setParameter("curso", curso+"%")
+				.getResultList();
 	}
 }

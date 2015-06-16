@@ -23,7 +23,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "TB_DISCIPLINA")
-@NamedQueries({ @NamedQuery(name = "Disciplina.findByNomeECurso", query = "SELECT d FROM Disciplina d WHERE d.nome LIKE :nome AND d.curso LIKE :curso") })
+@NamedQueries({ @NamedQuery(name = "Disciplina.findByNameECurso", query = "SELECT d FROM Disciplina d WHERE d.nome LIKE :nome AND d.curso LIKE :curso") })
 public class Disciplina {
 
 	@Id
