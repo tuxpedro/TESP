@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import br.com.phsweb.escola.entidades.Disciplina;
 
@@ -43,7 +44,10 @@ public class ServicoDisciplina implements DAO<Disciplina, Long> {
 	@Override
 	public Disciplina find(Long k) throws Exception {
 		log.info("Encontrando a disciplina " + k);
-		return em.find(Disciplina.class, k);
+		
+		Query query = em.createQuery("select d from Disciplina d join fetch d.alunos where d.id = :id");
+		query.setParameter("id", k);
+		return (Disciplina) query.getSingleResult();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -62,7 +66,7 @@ public class ServicoDisciplina implements DAO<Disciplina, Long> {
 	public List<Disciplina> findByNameECurso(String nome, String curso) {
 		log.info("Pesquisando Disciplina por " + nome);
 		return em.createNamedQuery("Disciplina.findByNameECurso")
-				.setParameter("nome", nome+"%").setParameter("curso", curso+"%")
-				.getResultList();
+				.setParameter("nome", nome + "%")
+				.setParameter("curso", curso + "%").getResultList();
 	}
 }

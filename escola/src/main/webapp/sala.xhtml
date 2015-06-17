@@ -7,8 +7,9 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
-		<h:panelGroup id="cadastro">
 
+		<!-- inicio do cadastro -->
+		<h:panelGroup id="cadastro">
 			<h:form id="cad" rendered="#{not empty salaMb.sala}">
 				<rich:panel>
 					<h:outputText value="Cadastro de Salas"
@@ -65,12 +66,15 @@
 				</rich:panel>
 			</h:form>
 		</h:panelGroup>
+		<!-- fim do cadastro -->
 
 		<rich:panel rendered="#{empty salaMb.sala}">
+
 			<h:outputText value="Lista de Salas"
 				style="font-size:15px;font-weight:bold" />
-			<h:form id="arg">
 
+			<!-- inicio formulario de pesquisa -->
+			<h:form id="arg">
 				<rich:toolbar height="26" itemSeparator="grid">
 					<rich:toolbarGroup>
 						<h:commandButton id="novo" action="#{salaMb.novo}"
@@ -82,12 +86,15 @@
 						<h:commandButton id="pesquisar" action="#{salaMb.pesquisar}"
 							value="Pesquisar" render="tabela" />
 					</rich:toolbarGroup>
-
 				</rich:toolbar>
 			</h:form>
+			<!-- fim do formulario de pesquisa -->
+
 			<h:panelGroup rendered="#{empty salaMb.salas}">
 				<h:outputText value="Nenhum sala existe" />
 			</h:panelGroup>
+
+			<!-- tabela de salas -->
 			<h:form id="edt">
 				<rich:dataTable id="tabela" var="sala" value="#{salaMb.salas}"
 					rendered="#{not empty salaMb.salas}"
@@ -119,7 +126,7 @@
 					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Possui Data Show?" />
-						</f:facet>	
+						</f:facet>
 						<h:outputText value="#{sala.possuiDataShow ? 'Sim' : 'Não'}" />
 					</rich:column>
 					<rich:column>
@@ -132,8 +139,9 @@
 						<f:facet name="header">
 							<h:outputText value="Status" />
 						</f:facet>
-						<h:outputText value="#{sala.status == 1 ? 'Ativo' : sala.status == 2 ? 'Em Manutenção' : 'Desativo'}" />
-					</rich:column>				
+						<h:outputText
+							value="#{sala.status == 1 ? 'Ativo' : sala.status == 2 ? 'Em Manutenção' : 'Desativo'}" />
+					</rich:column>
 					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Data Término Manutenção" />
@@ -141,7 +149,7 @@
 						<h:outputText value="#{sala.dataTerminoManutencao}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
-					</rich:column>						
+					</rich:column>
 					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Comandos " />
@@ -160,6 +168,8 @@
 					</rich:column>
 				</rich:dataTable>
 			</h:form>
+			<!-- fim da tabela de salas -->
+
 		</rich:panel>
 	</ui:define>
 </ui:composition>

@@ -156,6 +156,20 @@ public class ControleDisciplina {
 		this.alunos = alunos;
 	}
 
+	public String getTipo(int n) {
+		switch (n) {
+		case 1:
+			return "Presencial";
+		case 2:
+			return "À distância";
+		case 3:
+			return "Presencial e à distância";
+		default:
+			return "";
+		}
+
+	}
+
 	@PostConstruct
 	public void listaDisciplina() {
 		log.info("excutando o MB de disciplina");
@@ -222,5 +236,5 @@ public class ControleDisciplina {
 	public void cancelar() {
 		disciplina = null;
 	}
-	
+
 }

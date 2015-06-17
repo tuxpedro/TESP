@@ -58,13 +58,24 @@
 				<rich:dropDownMenu mode="ajax">
 					<f:facet name="label">
 						<h:panelGroup>
-							<h:graphicImage value="/resources/gfx/sala.png"
-								alt="salas" />
+							<h:graphicImage value="/resources/gfx/sala.png" alt="salas" />
 							<h:outputText value="Salas" />
 						</h:panelGroup>
 					</f:facet>
 					<rich:menuItem label="Cadastro"
 						onclick="document.location.href='sala.jsf'"
+						icon="/resources/gfx/seta.gif"
+						style="background-color: rgb(223, 247, 247);" />
+				</rich:dropDownMenu>
+				<rich:dropDownMenu mode="ajax">
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:graphicImage value="/resources/gfx/disci.gif" alt="Disciplinas" />
+							<h:outputText value="Disciplinas" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem label="Cadastro"
+						onclick="document.location.href='disciplina.jsf'"
 						icon="/resources/gfx/seta.gif"
 						style="background-color: rgb(223, 247, 247);" />
 				</rich:dropDownMenu>

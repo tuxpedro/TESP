@@ -7,14 +7,15 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
-		<rich:panel header="Registers">
+		<rich:panel header="Cadastros">
 			<!-- bar of search and table disciplines -->
 
 			<h:outputText value="Lista de disciplinas"
-				style="font-size: 15px; font-weight:bold;" />
+				style="font-size: 15px; font-weight:bold;"
+				rendered="#{empty disciplinaMb.disciplina}" />
 
-			<!-- Bar of search whith button in the new and search -->
-			<h:form id="search">
+			<!-- inicio barra de pesquisa -->
+			<h:form id="search" rendered="#{empty disciplinaMb.disciplina}">
 				<rich:toolbar height="26" itemSeparator="grid">
 					<rich:toolbarGroup>
 						<h:commandButton id="novo" value="Novo"
@@ -31,13 +32,20 @@
 					</rich:toolbarGroup>
 				</rich:toolbar>
 			</h:form>
-			<!-- end of the search bar -->
+			<!-- fim barra de pesquisa -->
 
-			<!-- Table of disciplines registered -->
-			<h:form>
+			<h:panelGroup rendered="#{empty disciplinaMb.disciplinas}">
+				<h:outputText value="Nenhuma Disciplina cadastrada"
+					style="font-weight:bold;" />
+			</h:panelGroup>
+
+			<!-- inicio tabela disciplinas -->
+			<h:form rendered="#{empty disciplinaMb.disciplina}">
+				<rich:messages />
 				<rich:dataTable id="tabeladisciplinas" var="disciplina"
 					value="#{disciplinaMb.disciplinas}"
-					onrowclick="selectRow('#{disciplina.id}')">
+					onrowclick="selectRow('#{disciplina.id}')"
+					rendered="#{not empty disciplinaMb.disciplinas}">
 					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Id" />
@@ -66,20 +74,19 @@
 						<f:facet name="header">
 							<h:outputText value="Tipo" />
 						</f:facet>
-						<h:outputText
-							value="#{disciplina.tipo}" />
+						<h:outputText value="#{disciplinaMb.getTipo(disciplina.tipo)}" />
 					</rich:column>
 					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Sala" />
 						</f:facet>
-						<h:outputText value="#{disciplina.sala}" />
+						<h:outputText value="#{disciplina.sala.codigo}" />
 					</rich:column>
 					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Professor" />
 						</f:facet>
-						<h:outputText value="#{disciplina.professor}" />
+						<h:outputText value="#{disciplina.professor.nome}" />
 					</rich:column>
 					<rich:column>
 						<f:facet name="header">
@@ -99,15 +106,12 @@
 					</rich:column>
 				</rich:dataTable>
 			</h:form>
-			<!-- end of the table disciplines registered -->
+			<!-- fim tabela disciplinas -->
 
-			<h:panelGroup>
-				<h:outputText value="Nenhuma Disciplina cadastrada"
-					style="font-weight:bold;" />
-			</h:panelGroup>
-
-			<!-- end of the bar of search and table disciplines -->
-			<h:panelGroup id="registers">
+			<!-- inicio form tabpainel-->
+			<h:panelGroup id="registers"
+				rendered="#{not empty disciplinaMb.disciplina}">
+				<rich:messages />
 				<h:form>
 					<h:outputText value="Cadastro de disciplina"
 						style="font-size:15px; font-weight:bold;" />
@@ -129,7 +133,8 @@
 								<h:message for="cargahoraria" errorClass="invalid" />
 
 								<h:outputLabel value="Tipo" for="tipo" />
-								<h:selectOneRadio id="tipo">
+								<h:selectOneRadio id="tipo"
+									value="#{disciplinaMb.disciplina.tipo}">
 									<f:selectItem itemValue="1" itemLabel="Presencial" />
 									<f:selectItem itemValue="2" itemLabel="À distância" />
 									<f:selectItem itemValue="3"
@@ -140,26 +145,24 @@
 								<br />
 
 								<h:outputLabel value="Sala" for="sala" />
-								<rich:select id="sala" value="#{disciplinaMb.disciplina.sala}">
-									<f:selectItem itemLabel="Selecione a sala"
-										noSelectionOption="true" />
+								<rich:select id="sala" value="#{disciplinaMb.disciplina.sala}"
+									defaultLabel="Selecione a sala">
 									<f:selectItems value="#{disciplinaMb.salas}" var="s"
-										itemValue="#{s}" itemLabel="#{s.codigo}" />
+										itemValue="#{s}"
+										itemLabel="#{s.codigo} (Capacidade=#{s.capacidade})" />
 									<f:converter converterId="ConversorSala" />
 								</rich:select>
 
-
 								<br />
+
 								<h:outputLabel value="Professor" for="professor" />
 								<rich:select id="professor"
-									value="#{disciplinaMb.disciplina.professor}">
-									<f:selectItem itemLabel="Selecione o professor"
-										noSelectionOption="true" />
+									value="#{disciplinaMb.disciplina.professor}"
+									defaultLabel="Selecione o professor">
 									<f:selectItems value="#{disciplinaMb.professores}" var="p"
 										itemValue="#{p}" itemLabel="#{p.nome}" />
 									<f:converter converterId="ConversorProfessor" />
 								</rich:select>
-
 
 							</h:panelGrid>
 						</rich:tab>
@@ -235,6 +238,8 @@
 
 				</h:form>
 			</h:panelGroup>
+			<!-- fim do tabpainel -->
+
 		</rich:panel>
 	</ui:define>
 </ui:composition>

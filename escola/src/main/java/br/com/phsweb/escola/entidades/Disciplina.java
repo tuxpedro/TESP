@@ -53,38 +53,29 @@ public class Disciplina {
 	private int tipo;
 
 	@NotNull
-	@Size(min = 5, max = 4000, message = "Você excedeu o número de caracteres")
-	@Pattern(regexp = "[a-zA-Zà-úÀ-Ú0-9 ]*")
+	@Size(min = 10, max = 4000, message = "Você excedeu o número de caracteres")
 	@Column(name = "EMENTA", columnDefinition = "VARCHAR(4000)", length = 4000, nullable = false)
 	private String ementa;
 
 	@NotNull
-	@Size(min = 5, max = 4000, message = "Você excedeu o número de caracteres")
-	@Pattern(regexp = "[a-zA-Zà-úÀ-Ú0-9 ]*")
+	@Size(min = 10, max = 4000, message = "Você excedeu o número de caracteres")
 	@Column(name = "BIBLIOGRAFIA", columnDefinition = "VARCHAR(4000)", length = 4000, nullable = false)
-	private String Bibliografia;
+	private String bibliografia;
 
 	@NotNull
-	@Size(min = 5, max = 4000, message = "Você excedeu o número de caracteres")
-	@Pattern(regexp = "[a-zA-Zà-úÀ-Ú0-9 ]*")
-	@Column(name = "DISTRIBUICAO_AVALIACAO", columnDefinition = "VARCHAR(100)", length = 100, nullable = false)
+	@Size(min = 10, max = 4000, message = "Você excedeu o número de caracteres")
+	@Column(name = "DISTRIBUICAO_AVALIACAO", columnDefinition = "VARCHAR(4000)", length = 4000, nullable = false)
 	private String distribuicaoAvalicao;
 
-	@NotNull
-	@Size(min = 5, max = 4000, message = "Você excedeu o número de caracteres")
-	@Pattern(regexp = "[a-zA-Zà-úÀ-Ú0-9 ]*")
-	@Column(name = "OBS", columnDefinition = "VARCHAR(100)", length = 100, nullable = false)
+	@Size(max = 4000, message = "Você excedeu o número de caracteres")
+	@Column(name = "OBS", columnDefinition = "VARCHAR(4000)", length = 4000, nullable = false)
 	private String observacao;
 
 	@ManyToOne
-	// @JoinColumn(name = "SALA_ID", insertable = false, updatable = false,
-	// nullable = false)
 	@NotNull
 	private Sala sala;
 
 	@ManyToOne
-	// @JoinColumn(name = "PROFESSOR_ID", insertable = false, updatable = false,
-	// nullable = false)
 	@NotNull
 	private Professor professor;
 
@@ -149,11 +140,11 @@ public class Disciplina {
 	}
 
 	public String getBibliografia() {
-		return Bibliografia;
+		return bibliografia;
 	}
 
 	public void setBibliografia(String bibliografia) {
-		Bibliografia = bibliografia;
+		this.bibliografia = bibliografia;
 	}
 
 	public String getDistribuicaoAvalicao() {
@@ -208,10 +199,9 @@ public class Disciplina {
 	public String toString() {
 		return "Disciplina [id=" + id + ", nome=" + nome + ", curso=" + curso
 				+ ", cargaHoraria=" + cargaHoraria + ", tipo=" + tipo
-				+ ", ementa=" + ementa + ", Bibliografia=" + Bibliografia
+				+ ", ementa=" + ementa + ", bibliografia=" + bibliografia
 				+ ", distribuicaoAvalicao=" + distribuicaoAvalicao
-				+ ", observacao=" + observacao + ", sala=" + sala
-				+ ", professor=" + professor + ", alunos=" + alunos + "]";
+				+ ", observacao=" + observacao + "]";
 	}
 
 }
