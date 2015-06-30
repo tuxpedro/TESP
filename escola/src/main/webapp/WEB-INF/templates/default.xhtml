@@ -1,15 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:a4j="http://richfaces.org/a4j">
+	xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<title>PHS - School</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<h:outputStylesheet name="css/screen.css" />
+	<h:outputScript library="js" name="jquery.maskedinput.min.js"
+		target="head" />
+
 </h:head>
 <h:body>
 	<div id="container">
@@ -70,7 +72,8 @@
 				<rich:dropDownMenu mode="ajax">
 					<f:facet name="label">
 						<h:panelGroup>
-							<h:graphicImage value="/resources/gfx/disci.gif" alt="Disciplinas" />
+							<h:graphicImage value="/resources/gfx/disci.gif"
+								alt="Disciplinas" />
 							<h:outputText value="Disciplinas" />
 						</h:panelGroup>
 					</f:facet>
@@ -79,6 +82,78 @@
 						icon="/resources/gfx/seta.gif"
 						style="background-color: rgb(223, 247, 247);" />
 				</rich:dropDownMenu>
+
+				<!-- ínicio menu relatórios -->
+				<h:form>
+					<rich:dropDownMenu>
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:graphicImage value="/resources/gfx/relat.gif"
+									alt="Relatórios" />
+								<h:outputText value="Relatórios" />
+							</h:panelGroup>
+						</f:facet>
+						<rich:menuGroup label="Relatórios das Salas">
+							<f:facet name="icon">
+								<h:graphicImage value="/resources/gfx/seta.gif"
+									alt="Ver e Print" />
+							</f:facet>
+							<rich:menuItem label="Salas (Visualizar)"
+								actionListener="#{relatoriosmb.geraRelatorio('RelatorioSalas','inline')}"
+								icon="/resources/gfx/view.png"
+								style="background-color: rgb(223, 247, 247);" />
+							<rich:menuItem label="Salas (Salvar)"
+								actionListener="#{relatoriosmb.geraRelatorio('RelatorioSalas','attach')}"
+								icon="/resources/gfx/save.png" />
+						</rich:menuGroup>
+
+
+						<rich:menuGroup label="Relatórios dos Professores">
+							<f:facet name="icon">
+								<h:graphicImage value="/resources/gfx/seta.gif"
+									alt="Ver e Print" />
+							</f:facet>
+							<rich:menuItem label="Professores (Visualizar)"
+								actionListener="#{relatoriosmb.geraRelatorio('RelatorioProressores','inline')}"
+								icon="/resources/gfx/view.png"
+								style="background-color: rgb(223, 247, 247);" />
+							<rich:menuItem label="Professores (Salvar)"
+								actionListener="#{relatoriosmb.geraRelatorio('RelatorioProressores','attach')}"
+								icon="/resources/gfx/save.png" />
+						</rich:menuGroup>
+
+						<rich:menuGroup label="Relatórios de Alunos">
+							<f:facet name="icon">
+								<h:graphicImage value="/resources/gfx/seta.gif"
+									alt="Ver e Print" />
+							</f:facet>
+							<rich:menuItem label="Alunos (Visualizar)"
+								actionListener="#{relatoriosmb.geraRelatorio('RelatorioAlunos','inline')}"
+								icon="/resources/gfx/view.png"
+								style="background-color: rgb(223, 247, 247);" />
+							<rich:menuItem label="Alunos (Salvar)"
+								actionListener="#{relatoriosmb.geraRelatorio('RelatorioAlunos','attach')}"
+								icon="/resources/gfx/save.png" />
+						</rich:menuGroup>
+
+						<rich:menuGroup label="Relatórios de Diciplinas">
+							<f:facet name="icon">
+								<h:graphicImage value="/resources/gfx/seta.gif"
+									alt="Ver e Print" />
+							</f:facet>
+							<rich:menuItem label="Disciplinas (Terminar)"
+								actionListener="#{relatoriosmb.geraRelatorio('RelatorioDisciplinas','inline')}"
+								icon="/resources/gfx/view.png"
+								style="background-color: rgb(223, 247, 247);" />
+							<rich:menuItem label="Disciplinas (Terminar)"
+								actionListener="#{relatoriosmb.geraRelatorio('RelatorioDisciplinas','attach')}"
+								icon="/resources/gfx/save.png" />
+						</rich:menuGroup>
+
+					</rich:dropDownMenu>
+
+				</h:form>
+				<!-- fim menu relatórios -->
 			</rich:toolbar>
 			<ui:insert name="content">
                     [Template content will be inserted here]

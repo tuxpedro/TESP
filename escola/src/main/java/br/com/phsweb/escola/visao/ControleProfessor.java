@@ -62,7 +62,7 @@ public class ControleProfessor {
 		}
 	}
 
-	public void gravar() {
+	public String gravar() {
 
 		FacesMessage facesMsg;
 		try {
@@ -77,12 +77,15 @@ public class ControleProfessor {
 
 			FacesContext.getCurrentInstance().addMessage("messagePanel",
 					facesMsg);
-			return;
+			return "professor";
 		}
 		facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Professor Gravado com sucesso!", "");
+				"Professor " + professor.getNome() + " gravado com sucesso!",
+				"");
 
 		FacesContext.getCurrentInstance().addMessage("messagePanel", facesMsg);
+
+		return "professor";
 	}
 
 	public void pesquisar() {
@@ -113,6 +116,7 @@ public class ControleProfessor {
 	public void excluir() {
 		try {
 			sp.Delete(sp.find(id));
+			professores = sp.findAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

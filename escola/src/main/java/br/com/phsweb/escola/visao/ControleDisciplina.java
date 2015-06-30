@@ -180,7 +180,7 @@ public class ControleDisciplina {
 		}
 	}
 
-	public void gravar() {
+	public String gravar() {
 		FacesMessage facesMsg;
 		try {
 			if (disciplina.getId() == null) {
@@ -194,12 +194,13 @@ public class ControleDisciplina {
 
 			FacesContext.getCurrentInstance().addMessage("messagePanel",
 					facesMsg);
-			return;
+			return "disciplina";
 		}
 		facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"Disciplina gravada com sucesso!", "");
 
 		FacesContext.getCurrentInstance().addMessage("messagePanel", facesMsg);
+		return "disciplina";
 	}
 
 	public void pesquisa() {
@@ -227,14 +228,16 @@ public class ControleDisciplina {
 	public void excluir() {
 		try {
 			sd.Delete(sd.find(id));
+			disciplinas = sd.findAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		disciplina = null;
 	}
 
-	public void cancelar() {
-		disciplina = null;
+	public String cancelar() {
+		// disciplina = null;
+		return "disciplina";
 	}
 
 }

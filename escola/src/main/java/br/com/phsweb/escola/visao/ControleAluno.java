@@ -53,16 +53,12 @@ public class ControleAluno {
 	}
 
 	@PostConstruct
-	public void inicializaLista() {
+	public void inicializaLista() throws Exception {
 		log.info("Executa o MB de aluno");
-		try {
-			alunoes = sa.findAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		alunoes = sa.findAll();
 	}
 
-	public void gravar() {
+	public String gravar() {
 		FacesMessage facesMsg;
 		try {
 			if (aluno.getId() == null) {
@@ -76,12 +72,14 @@ public class ControleAluno {
 
 			FacesContext.getCurrentInstance().addMessage("messagePanel",
 					facesMsg);
-			return;
+			return " ";
 		}
 		facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"Aluno Gravado com sucesso!", "");
 
 		FacesContext.getCurrentInstance().addMessage("messagePanel", facesMsg);
+
+		return "aluno";
 	}
 
 	public void pesquisar() {
@@ -113,6 +111,7 @@ public class ControleAluno {
 	public void excluir() {
 		try {
 			sa.Delete(sa.find(id));
+			alunoes = sa.findAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
